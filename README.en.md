@@ -29,11 +29,12 @@ Here are six ordinary objects, reimagined as artifacts from the future. The coll
   </tr>
 </table>
 
-## Why people come back
+## Make it a shared ritual
 
-Give the future one ordinary object and see what it gets wrong. A tangled cable becomes a portable energy umbilical; a worn key becomes permission to return. Each object from a desk, bag, kitchen, or family archive reveals a different present-day habit, while the shared accession system, curatorial voice, and card layout make the results a recognizable series rather than a one-shot filter.
-
-The default scene treats the object as an archaeological survivor. Ask for `original-condition preservation` to change only its setting and light without adding future damage.
+- **Post a daily artifact:** Photograph one small object each day and share what people in 3026 might think it was. Over time, it becomes your own future museum.
+- **Make a reveal video:** Open with the real object, then cut to its future exhibit card and read the deadpan museum label aloud. Let the comments choose the next artifact.
+- **Play with friends:** Swap object photos, guess how the future will misunderstand them, and reveal the generated cards. Try a couples, roommates, coworkers, or family collection.
+- **Build a personal exhibition:** Turn someone's keys, earbuds, tickets, and desk objects into a birthday keepsake, travel archive, or year-in-review collection.
 
 ## Compatibility
 
