@@ -12,9 +12,9 @@ Artifact 3026 是一个面向**支持开放 Agent Skills 标准的 AI 助手**�
   <img src="examples/cards/meeting-room-paper-cup.png" width="400" alt="示例：3026 年如何误读一只会议室纸杯">
 </p>
 
-## 六件藏品，一眼看完
+## 看看 3026 年如何理解今天
 
-六个示例直接展示在首页，覆盖中文/英文与 `deadpan`、`tender`、`absurd` 三种口吻。点击缩略图可查看可编辑 SVG；每例同时保留 [JSON 数据](examples/)、[生成场景](examples/scenes/)与 [1080×1440 PNG](examples/cards/)，图像来源见 [examples/SOURCES.md](examples/SOURCES.md)。
+下面是六件来自日常生活的“未来藏品”，有中文也有英文，口吻从一本正经到温柔、荒诞。点击图片可查看可编辑 SVG；每件藏品还保留了 [JSON 数据](examples/)、[生成场景](examples/scenes/)和 [1080×1440 PNG](examples/cards/)，图像来源见 [examples/SOURCES.md](examples/SOURCES.md)。
 
 <table>
   <tr>

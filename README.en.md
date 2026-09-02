@@ -12,9 +12,9 @@ The repository URL remains <https://github.com/xxwzkdwz/future-museum-curator>. 
   <img src="examples/cards/meeting-room-paper-cup.png" width="400" alt="A meeting-room paper cup misread as an artifact from 3026">
 </p>
 
-## Six artifacts at a glance
+## See the present through the eyes of 3026
 
-All six examples are visible on the front page, spanning Chinese and English plus `deadpan`, `tender`, and `absurd` voices. Click a thumbnail for the editable SVG. Each example also keeps its [JSON data](examples/), generated [museum scene](examples/scenes/), and [1080×1440 PNG](examples/cards/); image provenance remains in [examples/SOURCES.md](examples/SOURCES.md).
+Here are six ordinary objects, reimagined as artifacts from the future. The collection moves between Chinese and English, and from deadpan to tender and absurd. Click an image for the editable SVG; each artifact also includes its [JSON data](examples/), generated [museum scene](examples/scenes/), and [1080×1440 PNG](examples/cards/). Image provenance remains in [examples/SOURCES.md](examples/SOURCES.md).
 
 <table>
   <tr>
