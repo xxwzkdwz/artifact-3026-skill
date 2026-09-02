@@ -36,18 +36,24 @@ Artifact 3026 是一个面向**支持开放 Agent Skills 标准的 AI 助手**�
 - **和朋友一起玩**：互相发一张物品照片，先猜未来人会怎么误解，再揭晓生成结果。情侣、同事、宿舍和家庭旧物都可以做成系列。
 - **做一场私人展览**：把一个人的钥匙、耳机、旧票根和书桌物件收成一组，作为生日纪念、旅行回忆或年度生活档案分享出去。
 
-## 兼容性
+## 在哪些 AI 里可以用
 
-本仓库只有一个权威 Skill：`.agents/skills/artifact-3026/SKILL.md`。平台包装只负责把这个目录复制或链接到官方识别的位置，不维护第二份 `SKILL.md`。
+Artifact 3026 的玩法不绑定某一家模型。区别只在于：有些 Agent 能直接加载 Skill，有些聊天产品需要上传文件或复制提示词。
 
-| 平台 | 官方开放标准支持 | 本仓库中的使用方式 |
-|---|---|---|
-| OpenAI / Codex | 原生读取项目或用户级 `.agents/skills/` | 克隆后项目内可发现；用户级可运行安装脚本 |
-| Cursor | 原生读取 `.agents/skills/`，也兼容若干平台目录 | 克隆后项目内可发现；用户级可运行安装脚本 |
-| GitHub Copilot | Agent、代码审查、CLI、VS Code 等支持 `.agents/skills/` | 克隆后使用标准目录；也可按官方 `gh skill` 预览流程安装 |
-| Claude / Claude Code | 支持开放 Agent Skills，但原生目录是 `.claude/skills/` | 使用安装脚本复制或链接同一个权威目录 |
+| 平台 | 怎么用 |
+|---|---|
+| OpenAI / Codex、Cursor、GitHub Copilot | 直接读取仓库里的 `.agents/skills/artifact-3026/`，也可以安装到用户目录 |
+| Claude / Claude Code | 运行安装脚本，放到 Claude 官方识别的 `.claude/skills/` |
+| Qwen Code（通义千问） | 运行 `--platform qwen`，放到 `.qwen/skills/` |
+| Kimi Code CLI | 项目内可直接读取 `.agents/skills/`；用户级可运行 `--platform kimi` |
+| 豆包模型 / 火山引擎 AgentKit | 运行打包脚本，把生成的 ZIP 作为自定义 Skill 上传到 AgentKit |
+| 智谱 GLM / GLM Coding Plan | 模型本身不负责安装；在支持 Agent Skills 的编码工具中按该工具的目录加载 |
 
-以上是官方文档所述的兼容路径，不等同于“所有 AI 都能一键安装”。官方来源、版本边界与本地实测状态见 [COMPATIBILITY.md](COMPATIBILITY.md)。
+豆包 App、智谱清言、通义千问 App/Web、Kimi、DeepSeek 等普通聊天产品，也可以读取物品照片并完成创作，但目前不能统一当作“原生安装 Skill”：上传 `SKILL.md` 或便携 ZIP，再附上下面的普通聊天版提示词即可。图片生成和本地分享卡脚本能否执行，取决于具体产品。
+
+> 请阅读我上传的 Artifact 3026 Skill。把这张物品照片想象成 3026 年博物馆的藏品，保留主体辨识度，生成未来考古展陈图，并给出藏品名、原用途、未来误读、策展人注释和馆藏编号。如果不能运行仓库脚本，先直接输出文案和图片。
+
+仓库始终只维护一个权威 `SKILL.md`。以上路径均按官方资料核验，来源、版本边界与本地实测状态见 [COMPATIBILITY.md](COMPATIBILITY.md)。
 
 ## 安装
 
@@ -70,15 +76,22 @@ python3 scripts/install_skill.py --platform agents --scope user --mode copy
 python3 scripts/install_skill.py --platform claude --scope user --mode copy
 ```
 
+适配 Qwen Code 或 Kimi Code CLI：
+
+```bash
+python3 scripts/install_skill.py --platform qwen --scope user --mode copy
+python3 scripts/install_skill.py --platform kimi --scope user --mode copy
+```
+
 开发时可把 `--mode copy` 改为 `--mode symlink`。脚本若发现目标已存在会停止，不会覆盖现有 Skill；先用 `--dry-run` 可只查看目标路径。
 
-对于没有自动 Skill 加载器的普通聊天产品，可生成便携包并手动附加 ZIP，或直接附加 `SKILL.md` 与其 `references/`、`scripts/` 资源：
+火山引擎 AgentKit 和没有自动 Skill 加载器的普通聊天产品，可先生成便携包；前者按平台流程上传自定义 Skill，后者手动附加 ZIP，或直接附加 `SKILL.md` 与其资源：
 
 ```bash
 python3 scripts/package_skill.py
 ```
 
-这种方式属于**手动兼容**，能否读取附件和执行本地脚本取决于具体产品，不能宣传为一键安装。
+AgentKit 使用官方的自定义 Skill 上传流程；普通聊天产品则属于**手动兼容**，能否读取附件和执行本地脚本取决于具体产品，不能宣传为一键安装。
 
 ## 使用
 

@@ -38,16 +38,22 @@ Here are six ordinary objects, reimagined as artifacts from the future. The coll
 
 ## Compatibility
 
-There is one canonical skill: `.agents/skills/artifact-3026/SKILL.md`. Platform adapters only copy or link that directory; they do not maintain duplicate instructions.
+Artifact 3026 is not tied to one model vendor. Some agents load the skill directly; ordinary chat products can use the same creative workflow by reading the uploaded files or a copied prompt.
 
-| Platform | Official open-skill support | Delivery in this repository |
-|---|---|---|
-| OpenAI / Codex | Project and user `.agents/skills/` | Native project discovery; installer for user scope |
-| Cursor | `.agents/skills/` plus selected compatibility paths | Native project discovery; installer for user scope |
-| GitHub Copilot | `.agents/skills/` across supported agent experiences | Standard project path; official `gh skill` preview is also documented |
-| Claude / Claude Code | Open Agent Skills with native `.claude/skills/` paths | Installer copies or links the same canonical directory |
+| Platform | How to use it |
+|---|---|
+| OpenAI / Codex, Cursor, GitHub Copilot | Read `.agents/skills/artifact-3026/` in place or install it at user scope |
+| Claude / Claude Code | Use the installer to place the canonical skill under `.claude/skills/` |
+| Qwen Code | Use `--platform qwen` to install under `.qwen/skills/` |
+| Kimi Code CLI | Reads the project `.agents/skills/` path; `--platform kimi` installs at user scope |
+| Doubao models / Volcengine AgentKit | Build the portable ZIP and upload it as an AgentKit custom skill |
+| Zhipu GLM / GLM Coding Plan | Load it through a coding-agent host that supports Agent Skills; the host, not the model, owns installation |
 
-These are documented compatibility paths, not a claim that every AI product supports one-click installation. See [COMPATIBILITY.md](COMPATIBILITY.md) for official sources, boundaries, and runtime test status.
+Ordinary chat products—including the Doubao app, Zhipu Qingyan, Qwen chat, Kimi, and DeepSeek—can still create an artifact from a photo, but they should not all be described as native one-click skill hosts. Attach `SKILL.md` or the portable ZIP and use this prompt; image generation and the local renderer depend on the product:
+
+> Read the attached Artifact 3026 skill. Reimagine this object as an exhibit in a museum in the year 3026 while keeping the object recognizable. Create a future-archaeology display image and provide an artifact name, original purpose, future misinterpretation, curator note, and accession number. If you cannot run the repository renderer, return the copy and image directly.
+
+The repository keeps one canonical `SKILL.md`. See [COMPATIBILITY.md](COMPATIBILITY.md) for official sources, support boundaries, and local test status.
 
 ## Install
 
@@ -70,15 +76,22 @@ Adapt it to Claude or Claude Code:
 python3 scripts/install_skill.py --platform claude --scope user --mode copy
 ```
 
+Adapt it to Qwen Code or Kimi Code CLI:
+
+```bash
+python3 scripts/install_skill.py --platform qwen --scope user --mode copy
+python3 scripts/install_skill.py --platform kimi --scope user --mode copy
+```
+
 Use `--mode symlink` for development or `--dry-run` to inspect the target. The installer stops if a different target already exists and never silently overwrites it.
 
-For ordinary chat products without an automatic skill loader, build a portable ZIP and attach it manually, or attach `SKILL.md` together with its `references/` and `scripts/` resources:
+For Volcengine AgentKit and ordinary chat products without an automatic loader, build a portable ZIP. Upload it as a custom skill in AgentKit, or attach it manually in a chat product:
 
 ```bash
 python3 scripts/package_skill.py
 ```
 
-That is **manual compatibility**: attachment reading and local script execution depend on the product and are not presented as one-click installation.
+AgentKit uses its documented custom-skill upload flow. Ordinary chat products are **manually compatible**: attachment reading and local script execution depend on the product and are not presented as one-click installation.
 
 ## Try it
 

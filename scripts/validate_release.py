@@ -125,7 +125,17 @@ def check_license_readmes_and_compatibility() -> None:
         if text.count('width="180"') != 6:
             fail(f"{name} gallery must use six uniform 180px thumbnails")
     compatibility = (ROOT / "COMPATIBILITY.md").read_text(encoding="utf-8")
-    for term in ("OpenAI / Codex", "Cursor", "GitHub Copilot", "Claude / Claude Code", "agentskills.io/specification"):
+    for term in (
+        "OpenAI / Codex",
+        "Cursor",
+        "GitHub Copilot",
+        "Claude / Claude Code",
+        "Qwen Code",
+        "Kimi Code CLI",
+        "火山引擎 AgentKit",
+        "智谱 GLM",
+        "agentskills.io/specification",
+    ):
         if term not in compatibility:
             fail(f"compatibility matrix is missing {term}")
     naming = (ROOT / "docs" / "NAMING.md").read_text(encoding="utf-8")
@@ -148,6 +158,15 @@ def check_install_and_package_adapters() -> None:
         installer.install(SKILL_DIR, claude_target, "symlink")
         if not claude_target.is_symlink() or claude_target.resolve() != SKILL_DIR.resolve():
             fail("Claude symlink adapter does not point to the canonical skill")
+        qwen_target = installer.target_path("qwen", "project", temp / "qwen-project")
+        if qwen_target != ((temp / "qwen-project").resolve() / ".qwen" / "skills" / "artifact-3026"):
+            fail("Qwen project adapter does not use .qwen/skills")
+        kimi_target = installer.target_path("kimi", "project", temp / "kimi-project")
+        if kimi_target != ((temp / "kimi-project").resolve() / ".agents" / "skills" / "artifact-3026"):
+            fail("Kimi project adapter does not use .agents/skills")
+        kimi_user_target = installer.target_path("kimi", "user", temp)
+        if kimi_user_target != (Path.home() / ".config" / "agents" / "skills" / "artifact-3026"):
+            fail("Kimi user adapter does not use the recommended user path")
         archive_path = packager.build(temp / "artifact-3026.zip")
         with zipfile.ZipFile(archive_path) as archive:
             names = set(archive.namelist())
@@ -155,6 +174,8 @@ def check_install_and_package_adapters() -> None:
             fail("portable ZIP is missing its root SKILL.md")
         if sum(name.endswith("SKILL.md") for name in names) != 1:
             fail("portable ZIP must contain one SKILL.md")
+        if any(not name.startswith("artifact-3026/") for name in names):
+            fail("portable ZIP must keep every file under one AgentKit-compatible root directory")
 
 
 def check_examples() -> None:

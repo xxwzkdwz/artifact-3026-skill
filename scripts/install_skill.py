@@ -17,7 +17,14 @@ def target_path(platform: str, scope: str, project_dir: Path) -> Path:
         base = Path.home()
     else:
         base = project_dir.resolve()
-    folder = ".claude/skills" if platform == "claude" else ".agents/skills"
+    if platform == "claude":
+        folder = ".claude/skills"
+    elif platform == "qwen":
+        folder = ".qwen/skills"
+    elif platform == "kimi" and scope == "user":
+        folder = ".config/agents/skills"
+    else:
+        folder = ".agents/skills"
     return base / folder / SOURCE.name
 
 
@@ -48,11 +55,14 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
             "Install Artifact 3026 from its canonical .agents/skills directory. "
-            "The agents target covers hosts that support the open .agents convention; "
-            "the claude target adapts it to .claude/skills."
+            "The installer adapts the same source to each host's documented skill path."
         )
     )
-    parser.add_argument("--platform", choices=("agents", "codex", "cursor", "copilot", "claude"), default="agents")
+    parser.add_argument(
+        "--platform",
+        choices=("agents", "codex", "cursor", "copilot", "claude", "qwen", "kimi"),
+        default="agents",
+    )
     parser.add_argument("--scope", choices=("project", "user"), default="user")
     parser.add_argument("--mode", choices=("copy", "symlink"), default="copy")
     parser.add_argument("--project-dir", type=Path, default=Path.cwd())
@@ -62,8 +72,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    platform = "agents" if args.platform in {"codex", "cursor", "copilot"} else args.platform
-    target = target_path(platform, args.scope, args.project_dir)
+    target = target_path(args.platform, args.scope, args.project_dir)
     print(install(SOURCE, target, args.mode, args.dry_run))
     return 0
 

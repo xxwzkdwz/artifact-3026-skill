@@ -32,7 +32,7 @@ skills-ref validate .agents/skills/artifact-3026
 - [ ] Repository validation passes copy, symlink, portable ZIP, metadata, structure, terminology, gallery, and hygiene checks.
 - [ ] `skills-ref` passes when the reference validator is available; otherwise record it as unavailable rather than substituting an invented command.
 - [ ] All six public examples include portable JSON, recorded scene provenance, editable SVG, and a 1080×1440 PNG.
-- [ ] Installer dry runs point OpenAI/Codex, Cursor, and GitHub Copilot to `.agents/skills`, and Claude to `.claude/skills`.
+- [ ] Installer dry runs point OpenAI/Codex, Cursor, GitHub Copilot, and project-level Kimi Code CLI to `.agents/skills`; Claude to `.claude/skills`; Qwen Code to `.qwen/skills`; and user-level Kimi Code CLI to `.config/agents/skills`.
 
 ## Publication
 
