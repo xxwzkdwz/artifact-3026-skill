@@ -25,6 +25,7 @@ AI_BADGE_PATTERNS = (
     re.compile(r"AI\s*辅助(?:生成|创作|虚构)?(?:内容)?", re.IGNORECASE),
     re.compile(r"AI\s*生成", re.IGNORECASE),
     re.compile(r"人工智能(?:生成|辅助)", re.IGNORECASE),
+    re.compile(r"虚拟\s*生成", re.IGNORECASE),
 )
 VISIBLE_CARD_FIELDS = (
     "museum_name",
@@ -173,6 +174,11 @@ def check_examples() -> None:
         scene_path = input_path.parent / image_path
         if not scene_path.is_file():
             fail(f"missing generated scene: {scene_path.relative_to(ROOT)}")
+        scene_payload = scene_path.read_bytes()
+        if not scene_payload.startswith(b"\xff\xd8\xff"):
+            fail(f"invalid JPEG scene: {scene_path.relative_to(ROOT)}")
+        if contains_ai_badge(scene_payload.decode("latin-1")):
+            fail(f"JPEG metadata contains an AI-generation notice: {scene_path.relative_to(ROOT)}")
         if data.get("scene_source") != "AI-generated from text for this repository; see examples/SOURCES.md":
             fail(f"missing scene provenance: {input_path.name}")
         visible_copy = "\n".join(str(data.get(field, "")) for field in VISIBLE_CARD_FIELDS)

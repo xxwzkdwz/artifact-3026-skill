@@ -31,6 +31,8 @@ class RenderCardTests(unittest.TestCase):
         svg = MODULE.render(self.sample())
         self.assertNotIn("AI-ASSISTED FICTION", svg)
         self.assertNotIn("AI辅助虚构内容", svg)
+        self.assertNotIn("AI 生成", svg)
+        self.assertNotIn("虚拟生成", svg)
         self.assertNotRegex(svg, r"(?i)\bAI[- ](?:generated|assisted)\b")
         self.assertIn("Cup &amp; Cable", svg)
         self.assertIn("desk object &lt;2026&gt;", svg)
