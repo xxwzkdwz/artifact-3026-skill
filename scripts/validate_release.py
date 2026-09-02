@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run dependency-free release checks for Future Museum Curator."""
+"""Run dependency-free release checks for Artifact 3026."""
 
 from __future__ import annotations
 
@@ -8,49 +8,29 @@ import json
 import re
 import struct
 import sys
+import tempfile
+import zipfile
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PLUGIN_PATH = ROOT / ".codex-plugin" / "plugin.json"
-SKILL_PATH = ROOT / "skills" / "future-museum-curator" / "SKILL.md"
-RENDERER_PATH = ROOT / "skills" / "future-museum-curator" / "scripts" / "render_exhibit_card.py"
-EXPECTED = {
-    "name": "future-museum-curator",
-    "author_name": "WANG ZHEN",
-    "author_url": "https://github.com/xxwzkdwz",
-    "repository": "https://github.com/xxwzkdwz/future-museum-curator",
-    "license": "MIT",
-}
+SKILL_DIR = ROOT / ".agents" / "skills" / "artifact-3026"
+SKILL_PATH = SKILL_DIR / "SKILL.md"
+RENDERER_PATH = SKILL_DIR / "scripts" / "render_exhibit_card.py"
+REPOSITORY = "https://github.com/xxwzkdwz/future-museum-curator"
 
 
 def fail(message: str) -> None:
     raise ValueError(message)
 
 
-def load_renderer():
-    spec = importlib.util.spec_from_file_location("future_museum_renderer", RENDERER_PATH)
+def load_module(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
     if not spec or not spec.loader:
-        fail("cannot load render_exhibit_card.py")
+        fail(f"cannot load {path.name}")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
-
-
-def check_plugin() -> None:
-    plugin = json.loads(PLUGIN_PATH.read_text(encoding="utf-8"))
-    checks = {
-        "plugin name": plugin.get("name") == EXPECTED["name"],
-        "author name": plugin.get("author", {}).get("name") == EXPECTED["author_name"],
-        "author URL": plugin.get("author", {}).get("url") == EXPECTED["author_url"],
-        "repository URL": plugin.get("repository") == EXPECTED["repository"],
-        "homepage URL": plugin.get("homepage") == EXPECTED["repository"],
-        "license": plugin.get("license") == EXPECTED["license"],
-        "skills directory": plugin.get("skills") == "./skills/",
-    }
-    failures = [label for label, passed in checks.items() if not passed]
-    if failures:
-        fail("plugin metadata mismatch: " + ", ".join(failures))
 
 
 def check_skill() -> None:
@@ -58,28 +38,94 @@ def check_skill() -> None:
     if not text.startswith("---\n"):
         fail("SKILL.md is missing YAML frontmatter")
     frontmatter = text.split("---", 2)[1]
-    if not re.search(r"^name:\s*future-museum-curator\s*$", frontmatter, re.MULTILINE):
-        fail("SKILL.md name does not match plugin")
-    if not re.search(r"^description:\s*\S.+$", frontmatter, re.MULTILINE):
-        fail("SKILL.md description is missing")
-    if "AI-ASSISTED FICTION" not in (ROOT / "skills" / "future-museum-curator" / "references" / "card-schema.md").read_text(encoding="utf-8"):
+    required_patterns = {
+        "name": r"^name:\s*artifact-3026\s*$",
+        "description": r"^description:\s*\S.+$",
+        "license": r"^license:\s*MIT\s*$",
+        "author": r"^\s*author:\s*WANG ZHEN\s*$",
+        "version": r'^\s*version:\s*"0\.2\.0"\s*$',
+        "repository": rf"^\s*repository:\s*{re.escape(REPOSITORY)}\s*$",
+    }
+    missing = [label for label, pattern in required_patterns.items() if not re.search(pattern, frontmatter, re.MULTILINE)]
+    if missing:
+        fail("SKILL.md metadata mismatch: " + ", ".join(missing))
+    if SKILL_DIR.name != "artifact-3026":
+        fail("skill directory must match the frontmatter name")
+    schema = (SKILL_DIR / "references" / "card-schema.md").read_text(encoding="utf-8")
+    if "AI-ASSISTED FICTION" not in schema:
         fail("card schema is missing the bilingual fiction disclosure")
 
 
-def check_license_and_readmes() -> None:
+def check_single_vendor_neutral_canonical_skill() -> None:
+    skill_files = sorted(path for path in ROOT.rglob("SKILL.md") if ".git" not in path.parts)
+    if skill_files != [SKILL_PATH]:
+        found = ", ".join(str(path.relative_to(ROOT)) for path in skill_files)
+        fail(f"expected one canonical SKILL.md, found: {found}")
+    if (ROOT / ".codex-plugin").exists():
+        fail(".codex-plugin must not be the primary delivery path")
+    canonical_text = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in SKILL_DIR.rglob("*")
+        if path.is_file() and path.suffix.lower() in {".md", ".py", ".json", ".yaml", ".yml"}
+    )
+    banned = ("Codex", "OpenAI", "Claude", "Cursor", "Copilot", "$future-museum-curator")
+    present = [term for term in banned if term in canonical_text]
+    if present:
+        fail("canonical skill contains vendor-specific terms: " + ", ".join(present))
+    required_neutral_terms = ("host agent", "available image-generation tool", "local execution environment")
+    missing = [term for term in required_neutral_terms if term not in canonical_text]
+    if missing:
+        fail("canonical skill is missing neutral terminology: " + ", ".join(missing))
+
+
+def check_license_readmes_and_compatibility() -> None:
     license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
     if "MIT License" not in license_text or "Copyright (c) 2026 WANG ZHEN" not in license_text:
         fail("LICENSE does not match the declared MIT author metadata")
-    for readme in (ROOT / "README.md", ROOT / "README.zh-CN.md"):
-        text = readme.read_text(encoding="utf-8")
-        if EXPECTED["repository"] not in text:
-            fail(f"{readme.name} does not contain the canonical repository URL")
-        if "examples/meeting-room-paper-cup.svg" not in text:
-            fail(f"{readme.name} does not reference the generated example card")
+    chinese = (ROOT / "README.md").read_text(encoding="utf-8")
+    english = (ROOT / "README.en.md").read_text(encoding="utf-8")
+    if not re.search(r"[\u3400-\u9fff]", chinese) or "[English](README.en.md)" not in chinese:
+        fail("root README must default to Chinese with a clear English entry")
+    if "for AI assistants that support the open Agent Skills standard" not in english:
+        fail("English README is missing the precise open-standard compatibility statement")
+    for name, text in (("README.md", chinese), ("README.en.md", english)):
+        if REPOSITORY not in text or "examples/meeting-room-paper-cup.svg" not in text:
+            fail(f"{name} is missing the canonical URL or gallery evidence")
+    compatibility = (ROOT / "COMPATIBILITY.md").read_text(encoding="utf-8")
+    for term in ("OpenAI / Codex", "Cursor", "GitHub Copilot", "Claude / Claude Code", "agentskills.io/specification"):
+        if term not in compatibility:
+            fail(f"compatibility matrix is missing {term}")
+    naming = (ROOT / "docs" / "NAMING.md").read_text(encoding="utf-8")
+    for term in ("Artifact 3026", "Future Relic", "skills.sh", "anthropics/skills", "github/awesome-copilot"):
+        if term not in naming:
+            fail(f"naming research is missing {term}")
+
+
+def check_install_and_package_adapters() -> None:
+    installer = load_module("install_skill", ROOT / "scripts" / "install_skill.py")
+    packager = load_module("package_skill", ROOT / "scripts" / "package_skill.py")
+    with tempfile.TemporaryDirectory() as temp_dir:
+        temp = Path(temp_dir)
+        agents_target = installer.target_path("agents", "project", temp)
+        installer.install(SKILL_DIR, agents_target, "copy")
+        if not (agents_target / "SKILL.md").is_file():
+            fail("agents copy adapter did not install SKILL.md")
+        claude_project = temp / "claude-project"
+        claude_target = installer.target_path("claude", "project", claude_project)
+        installer.install(SKILL_DIR, claude_target, "symlink")
+        if not claude_target.is_symlink() or claude_target.resolve() != SKILL_DIR.resolve():
+            fail("Claude symlink adapter does not point to the canonical skill")
+        archive_path = packager.build(temp / "artifact-3026.zip")
+        with zipfile.ZipFile(archive_path) as archive:
+            names = set(archive.namelist())
+        if "artifact-3026/SKILL.md" not in names:
+            fail("portable ZIP is missing its root SKILL.md")
+        if sum(name.endswith("SKILL.md") for name in names) != 1:
+            fail("portable ZIP must contain one SKILL.md")
 
 
 def check_examples() -> None:
-    renderer = load_renderer()
+    renderer = load_module("artifact_3026_renderer", RENDERER_PATH)
     inputs = sorted((ROOT / "examples").glob("*.json"))
     if len(inputs) != 6:
         fail(f"expected 6 public examples, found {len(inputs)}")
@@ -99,55 +145,52 @@ def check_examples() -> None:
             fail(f"missing scene provenance: {input_path.name}")
         rendered = renderer.render(data, base_dir=input_path.parent)
         output_path = input_path.with_suffix(".svg")
-        if not output_path.is_file():
-            fail(f"missing generated example: {output_path.relative_to(ROOT)}")
-        if output_path.read_text(encoding="utf-8") != rendered:
-            fail(f"stale generated example: {output_path.relative_to(ROOT)}")
+        if not output_path.is_file() or output_path.read_text(encoding="utf-8") != rendered:
+            fail(f"missing or stale generated example: {output_path.relative_to(ROOT)}")
         if "AI-ASSISTED FICTION · AI辅助虚构内容" not in rendered:
             fail(f"missing disclosure in {output_path.relative_to(ROOT)}")
         card_path = ROOT / "examples" / "cards" / f"{input_path.stem}.png"
-        if not card_path.is_file():
-            fail(f"missing final PNG card: {card_path.relative_to(ROOT)}")
         payload = card_path.read_bytes()
         if payload[:8] != b"\x89PNG\r\n\x1a\n" or len(payload) < 24:
             fail(f"invalid PNG card: {card_path.relative_to(ROOT)}")
         if struct.unpack(">II", payload[16:24]) != (1080, 1440):
             fail(f"wrong PNG card dimensions: {card_path.relative_to(ROOT)}")
-    if tones != {"deadpan", "tender", "absurd"}:
-        fail("gallery must cover deadpan, tender, and absurd tones")
-    if chinese_examples != 3:
-        fail(f"gallery must contain 3 Chinese and 3 English examples, found {chinese_examples} Chinese")
+    if tones != {"deadpan", "tender", "absurd"} or chinese_examples != 3:
+        fail("gallery must cover three tones and contain three Chinese examples")
     if not (ROOT / "examples" / "SOURCES.md").is_file():
         fail("example image provenance record is missing")
 
 
 def check_repository_hygiene() -> None:
     required = [
-        ROOT / ".codex-plugin" / "plugin.json",
         ROOT / "LICENSE",
         ROOT / "README.md",
-        ROOT / "README.zh-CN.md",
+        ROOT / "README.en.md",
+        ROOT / "COMPATIBILITY.md",
+        ROOT / "docs" / "NAMING.md",
         SKILL_PATH,
         RENDERER_PATH,
+        ROOT / "scripts" / "install_skill.py",
+        ROOT / "scripts" / "package_skill.py",
     ]
     missing = [str(path.relative_to(ROOT)) for path in required if not path.is_file()]
     if missing:
         fail("missing required files: " + ", ".join(missing))
-    ignored = (ROOT / ".gitignore").read_text(encoding="utf-8").splitlines()
-    if "output/" not in ignored:
+    if "output/" not in (ROOT / ".gitignore").read_text(encoding="utf-8").splitlines():
         fail("local trial output must remain excluded from the public repository")
     placeholder_marker = "[TO" + "DO:"
     for path in ROOT.rglob("*"):
-        if path.is_file() and path.suffix.lower() in {".md", ".json", ".py", ".yaml", ".yml"}:
+        if path.is_file() and ".git" not in path.parts and path.suffix.lower() in {".md", ".json", ".py", ".yaml", ".yml"}:
             if placeholder_marker in path.read_text(encoding="utf-8"):
                 fail(f"unfinished placeholder in {path.relative_to(ROOT)}")
 
 
 def main() -> int:
     checks = [
-        ("plugin metadata", check_plugin),
-        ("skill metadata", check_skill),
-        ("license and readmes", check_license_and_readmes),
+        ("open skill metadata", check_skill),
+        ("single vendor-neutral canonical skill", check_single_vendor_neutral_canonical_skill),
+        ("license, readmes, compatibility, and naming", check_license_readmes_and_compatibility),
+        ("copy, symlink, and ZIP adapters", check_install_and_package_adapters),
         ("generated examples", check_examples),
         ("repository hygiene", check_repository_hygiene),
     ]
@@ -161,6 +204,6 @@ def main() -> int:
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
-    except (OSError, ValueError, json.JSONDecodeError) as error:
+    except (OSError, ValueError, json.JSONDecodeError, zipfile.BadZipFile) as error:
         print(f"release validation failed: {error}", file=sys.stderr)
         raise SystemExit(1)

@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "skills" / "future-museum-curator" / "scripts" / "render_exhibit_card.py"
+SCRIPT = ROOT / ".agents" / "skills" / "artifact-3026" / "scripts" / "render_exhibit_card.py"
 SPEC = importlib.util.spec_from_file_location("render_exhibit_card", SCRIPT)
 MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC and SPEC.loader

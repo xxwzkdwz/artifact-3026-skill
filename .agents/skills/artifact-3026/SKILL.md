@@ -1,11 +1,18 @@
 ---
-name: future-museum-curator
+name: artifact-3026
 description: Curate an everyday object or photo as a clearly fictional artifact from the future, with a museum label, optional generated exhibit scene, and deterministic share card. Use for creative requests to reimagine, archive, exhibit, or memorialize ordinary present-day objects; do not use for factual appraisal, provenance, valuation, or authentication.
+license: MIT
+metadata:
+  author: WANG ZHEN
+  version: "0.2.0"
+  repository: https://github.com/xxwzkdwz/future-museum-curator
 ---
 
-# Future Museum Curator
+# Artifact 3026
 
 Create an emotionally recognizable artifact from ordinary life, not generic science fiction. Reveal what the object means to people today by letting a future curator misunderstand it just enough.
+
+The host agent must be able to read the skill resources. Rendering requires a local execution environment with Python 3.11 or later; image generation or editing remains optional.
 
 ## Curate the object
 
@@ -38,7 +45,7 @@ Read [references/curatorial-guide.md](references/curatorial-guide.md) when the u
 
 ## Create the image
 
-When the user's Codex environment provides image generation or editing, create a museum-display image before laying out the card:
+When an available image-generation or image-editing tool exists, create a museum-display image before laying out the card:
 
 - With a source photo, prefer image editing. Keep the silhouette and identity-bearing details faithful while replacing the surroundings with a museum display.
 - Without a source photo, generate the artifact from the description, but do not add unsupported logos or identifying marks.
@@ -46,7 +53,7 @@ When the user's Codex environment provides image generation or editing, create a
 - Unless the user asks for pristine preservation, treat the object as an archaeological survivor rather than a new product: allow plausible age, restrained repair, and material change while keeping it recognizable.
 - Default to a three-quarter or slightly oblique view, an off-center composition, a dark stone or oxidized-metal collection space, thick display glass, and a restrained dust beam. Avoid bright, centered, symmetrical, sterile product photography and modern showroom styling.
 - If the user asks to preserve the original condition, keep the object's present-day wear and materials intact; change only the setting and light, without adding a thousand years of damage.
-- Use the image capability already available to the user. Do not require a repository-owned API key, hosted inference service, paid account, or third-party upload.
+- Use an available image-generation tool already accessible to the host agent. Do not require a repository-owned API key, hosted inference service, paid account, or third-party upload.
 
 Read [references/visual-direction.md](references/visual-direction.md) before generating or editing the exhibit scene. It contains the default prompt structure, preservation override, and an example based on a patterned straw cup.
 

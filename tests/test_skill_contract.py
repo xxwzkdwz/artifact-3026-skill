@@ -3,9 +3,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = (ROOT / "skills" / "future-museum-curator" / "SKILL.md").read_text(encoding="utf-8")
+SKILL = (ROOT / ".agents" / "skills" / "artifact-3026" / "SKILL.md").read_text(encoding="utf-8")
 VISUAL = (
-    ROOT / "skills" / "future-museum-curator" / "references" / "visual-direction.md"
+    ROOT / ".agents" / "skills" / "artifact-3026" / "references" / "visual-direction.md"
 ).read_text(encoding="utf-8")
 
 
