@@ -1,0 +1,13 @@
+{
+  "museum_name": "未来日常器物馆",
+  "future_year": "3026",
+  "artifact_name": "可消耗思想探针",
+  "object_identity": "木杆铅笔残段 · 约公元2026年 · 木材、石墨、颜料与齿痕",
+  "interpretation": "碳芯在纸面留下可以擦除的黑色轨迹，木质外壳则随着每次削尖不断缩短。早期研究者认为，器物变短证明思想会消耗实体；齿痕显示，当思想拒绝出现时，使用者会直接啃咬工具。",
+  "curator_note": "他们把它用到握不住，才承认这个想法值得留下。",
+  "accession_no": "FM-3026-7319",
+  "tone": "absurd",
+  "image_path": "scenes/used-pencil-stub.jpg",
+  "scene_source": "AI-generated from text for this repository; see examples/SOURCES.md",
+  "accent": "#9B6A25"
+}

@@ -1,0 +1,13 @@
+{
+  "museum_name": "MUSEUM OF EVERYDAY ANTIQUITIES",
+  "future_year": "3026",
+  "artifact_name": "一次性共识容器",
+  "object_identity": "会议室纸杯 · 约公元2026年 · 植物纤维、聚合物薄膜与微量咖啡因",
+  "interpretation": "公元三十一世纪初，考古人员在一处被称作“共享办公”的遗址中发现此物。杯沿的重复受压痕迹表明，它曾被早期办公室居民握在手中，以表示自己仍在参与一项名为“再对齐一下”的集体仪式。",
+  "curator_note": "它没有促成共识，只是让沉默看起来有事可做。",
+  "accession_no": "FM-3026-0184",
+  "tone": "deadpan",
+  "image_path": "scenes/meeting-room-paper-cup.jpg",
+  "scene_source": "AI-generated from text for this repository; see examples/SOURCES.md",
+  "accent": "#A7432B"
+}

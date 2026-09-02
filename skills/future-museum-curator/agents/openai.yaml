@@ -1,0 +1,4 @@
+interface:
+  display_name: "Future Museum Curator"
+  short_description: "Let the future misread an everyday object"
+  default_prompt: "Use $future-museum-curator to turn this everyday object into a fictional museum exhibit from 3026 and render a share card."

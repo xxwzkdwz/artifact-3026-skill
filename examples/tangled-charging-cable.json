@@ -1,0 +1,13 @@
+{
+  "museum_name": "MUSEUM OF EVERYDAY ANTIQUITIES",
+  "future_year": "3026",
+  "artifact_name": "Portable Energy Umbilical",
+  "object_identity": "Tangled charging cable · c. 2026 · copper, polymer, lint",
+  "interpretation": "Used during low-battery emergencies, this cord connected portable devices to wall power. Its knots were once thought to encode the owner's route. Researchers later concluded that the object formed them whenever placed inside a bag.",
+  "curator_note": "It connected devices better than standards.",
+  "accession_no": "FM-3026-2048",
+  "tone": "deadpan",
+  "image_path": "scenes/tangled-charging-cable.jpg",
+  "scene_source": "AI-generated from text for this repository; see examples/SOURCES.md",
+  "accent": "#A7432B"
+}
