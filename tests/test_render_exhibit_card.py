@@ -27,10 +27,11 @@ class RenderCardTests(unittest.TestCase):
             "curator_note": "Ordinary life survived in the wear.",
         }
 
-    def test_renders_disclosure_and_escapes_content(self):
+    def test_renders_without_ai_badge_and_escapes_content(self):
         svg = MODULE.render(self.sample())
-        self.assertIn("AI-ASSISTED FICTION", svg)
-        self.assertIn("AI辅助虚构内容", svg)
+        self.assertNotIn("AI-ASSISTED FICTION", svg)
+        self.assertNotIn("AI辅助虚构内容", svg)
+        self.assertNotRegex(svg, r"(?i)\bAI[- ](?:generated|assisted)\b")
         self.assertIn("Cup &amp; Cable", svg)
         self.assertIn("desk object &lt;2026&gt;", svg)
         self.assertIn('width="1080" height="1440"', svg)

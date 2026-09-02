@@ -16,7 +16,8 @@ Use this checklist before creating a public release of Artifact 3026.
 - [ ] README says “for AI assistants that support the open Agent Skills standard” and does not claim universal one-click installation.
 - [ ] Platform-specific behavior is sourced in `COMPATIBILITY.md` and separated from local runtime testing.
 - [ ] Canonical Skill instructions use host-neutral terms and contain no platform-specific wrapper.
-- [ ] Example cards visibly disclose `AI-ASSISTED FICTION · AI辅助虚构内容`.
+- [ ] Finished SVG and PNG cards contain no AI-generation badge, watermark, or equivalent notice.
+- [ ] README and `examples/SOURCES.md` still describe the AI-assisted workflow and preserve scene provenance.
 - [ ] No label claims real provenance, authentication, valuation, or museum affiliation.
 
 ## Verification

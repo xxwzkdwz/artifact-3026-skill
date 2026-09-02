@@ -201,7 +201,6 @@ def render(data: dict[str, object], base_dir: Path | None = None) -> str:
   {note_lines}
   <line x1="88" y1="1330" x2="992" y2="1330" stroke="#C7BBA8" stroke-width="2"/>
   <text x="88" y="1372" font-size="18" letter-spacing="1.2" fill="#756C60">{escape(accession)}</text>
-  <text x="992" y="1372" text-anchor="end" font-size="17" fill="#756C60">AI-ASSISTED FICTION · AI辅助虚构内容</text>
 </svg>
 '''
 

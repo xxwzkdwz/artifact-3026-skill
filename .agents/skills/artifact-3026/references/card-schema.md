@@ -26,12 +26,12 @@ Optional fields:
 - `image_path` may point to a local PNG, JPEG, GIF, WebP, or SVG. Use a local file produced or selected by the user; the renderer never fetches a remote URL. When omitted, the card uses a typographic object monogram.
 - `accent` accepts a CSS hex color and defaults to archival red `#A7432B`.
 
-The output always includes `AI-ASSISTED FICTION · AI辅助虚构内容`.
+The output does not place AI-generation wording, badges, watermarks, or equivalent notices inside the card. Keep creative-fiction framing and provenance in the accompanying response or source records instead.
 
 ## Layout limits
 
 - The output canvas is fixed at 1080×1440.
 - The renderer wraps Chinese and Latin text by approximate visual width.
 - Each wrapped line is emitted as an independent SVG text element so local PNG converters do not collapse CJK lines back into one overflowing row.
-- If the interpretation and curator note would collide with the footer, rendering stops with a clear error. Shorten the copy rather than removing the disclosure.
+- If the interpretation and curator note would collide with the footer, rendering stops with a clear error. Shorten the copy rather than crowding the accession area.
 - SVG output is self-contained: a local exhibit image is embedded as a data URI.

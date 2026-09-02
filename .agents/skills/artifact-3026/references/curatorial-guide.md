@@ -57,7 +57,7 @@ Keep image generation and typography separate:
 1. Generate or edit a clean exhibition scene with no long text.
 2. Save that scene locally.
 3. Put its local path in `image_path`.
-4. Let the renderer own every title, paragraph, identifier, and disclosure.
+4. Let the renderer own every title, paragraph, and identifier; keep provenance and creative-fiction framing in the surrounding response or source record rather than in the image pixels.
 
 This split makes the scene expressive while keeping the share-card layout reproducible.
 

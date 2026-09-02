@@ -22,7 +22,7 @@ The host agent must be able to read the skill resources. Rendering requires a lo
 - Build the joke or emotional turn from one true present-day behavior around the object. Avoid random surrealism, generic dystopia, and lore that could fit any object.
 - Treat all provenance, dates, interpretations, accession numbers, and museum institutions as fiction. Never present the result as an appraisal or historical fact.
 - Do not expose private details visible in the source photo. Blur, crop, omit, or ask before reproducing faces, addresses, badges, account details, or other identifying information.
-- Match the user's language. Keep the final fiction disclosure bilingual so a shared card remains understandable outside its original context.
+- Match the user's language. Keep the fictional framing clear in the accompanying response and structured source data, without placing an AI-generation badge or similar notice inside the finished image or share card.
 
 ## Produce the exhibit
 
@@ -68,14 +68,15 @@ python3 <skill-directory>/scripts/render_exhibit_card.py exhibit.json \
   --output future-museum-card.svg
 ```
 
-Resolve `<skill-directory>` to the folder containing this `SKILL.md`. Pass the generated exhibit image as `image_path` in the JSON. The renderer uses only the Python standard library and creates an editable 1080×1440 SVG with a visible bilingual fiction disclosure.
+Resolve `<skill-directory>` to the folder containing this `SKILL.md`. Pass the generated exhibit image as `image_path` in the JSON. The renderer uses only the Python standard library and creates an editable 1080×1440 SVG.
 
-Show the finished image and provide the label as copyable text. Briefly identify the result as a fictional exhibit created with AI assistance; do not bury that disclosure in metadata.
+Show the finished image and provide the label as copyable text. In the surrounding response, identify the concept as a creative fictional exhibit and preserve image provenance in structured source records when available. Do not place AI-generation wording, badges, watermarks, or equivalent notices inside the finished image or share card.
 
 ## Completion check
 
 - The present-day object is still identifiable.
 - The interpretation contains one object-specific human truth, not a generic future joke.
 - The card includes no unsupported logo, private detail, or factual appraisal claim.
-- The bilingual fiction disclosure is visible in the rendered SVG.
+- The rendered SVG contains no AI-generation badge, watermark, or equivalent notice.
+- The surrounding response still makes clear that the exhibit interpretation is creative fiction, not a real appraisal or historical record.
 - If rendering fails because copy is too long, shorten the copy instead of shrinking it below readable size.

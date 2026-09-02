@@ -8,7 +8,28 @@ Artifact 3026 是一个面向**支持开放 Agent Skills 标准的 AI 助手**�
 
 仓库 URL 继续保持为 <https://github.com/xxwzkdwz/future-museum-curator>；展示品牌与 Skill 标识分别升级为 **Artifact 3026 / 3026号藏品** 与 `artifact-3026`。命名调研与反证见 [docs/NAMING.md](docs/NAMING.md)。
 
-![示例：3026 年如何误读一只会议室纸杯](examples/cards/meeting-room-paper-cup.png)
+<p align="center">
+  <img src="examples/cards/meeting-room-paper-cup.png" width="400" alt="示例：3026 年如何误读一只会议室纸杯">
+</p>
+
+## 六件藏品，一眼看完
+
+六个示例直接展示在首页，覆盖中文/英文与 `deadpan`、`tender`、`absurd` 三种口吻。点击缩略图可查看可编辑 SVG；每例同时保留 [JSON 数据](examples/)、[生成场景](examples/scenes/)与 [1080×1440 PNG](examples/cards/)，图像来源见 [examples/SOURCES.md](examples/SOURCES.md)。
+
+<table>
+  <tr>
+    <td width="50%" align="center"><a href="examples/meeting-room-paper-cup.svg"><img src="examples/cards/meeting-room-paper-cup.png" width="180" alt="一次性共识容器"></a><br><strong>一次性共识容器</strong><br><sub>中文 · deadpan</sub></td>
+    <td width="50%" align="center"><a href="examples/tangled-charging-cable.svg"><img src="examples/cards/tangled-charging-cable.png" width="180" alt="Portable Energy Umbilical"></a><br><strong>Portable Energy Umbilical</strong><br><sub>English · deadpan</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="examples/forgotten-folding-umbrella.svg"><img src="examples/cards/forgotten-folding-umbrella.png" width="180" alt="Rain Negotiation Device"></a><br><strong>Rain Negotiation Device</strong><br><sub>English · absurd</sub></td>
+    <td align="center"><a href="examples/worn-wired-earbuds.svg"><img src="examples/cards/worn-wired-earbuds.png" width="180" alt="私人声音脐带"></a><br><strong>私人声音脐带</strong><br><sub>中文 · tender</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="examples/faded-brass-key.svg"><img src="examples/cards/faded-brass-key.png" width="180" alt="Permission to Return"></a><br><strong>Permission to Return</strong><br><sub>English · tender</sub></td>
+    <td align="center"><a href="examples/used-pencil-stub.svg"><img src="examples/cards/used-pencil-stub.png" width="180" alt="可消耗思想探针"></a><br><strong>可消耗思想探针</strong><br><sub>中文 · absurd</sub></td>
+  </tr>
+</table>
 
 ## 它为什么值得反复玩
 
@@ -76,18 +97,7 @@ python3 scripts/package_skill.py
 - `原物完好保存，不要添加未来损伤。`
 - `给我三个策展人注释版本。`
 
-每张卡都会明确标注“AI辅助虚构内容”，不声称真实来源、鉴定、估值或历史真实性。项目不托管推理服务，不要求共享 API Key、账号、统计或上传接口。
-
-## 画廊
-
-仓库保留六个可复用示例，覆盖中文/英文与 `deadpan`、`tender`、`absurd` 三种口吻。每例都含 [JSON 数据](examples/)、[生成场景](examples/scenes/)、可编辑 SVG 与 [1080×1440 PNG](examples/cards/)；图像来源见 [examples/SOURCES.md](examples/SOURCES.md)。
-
-- [一次性共识容器](examples/meeting-room-paper-cup.svg) · 中文 · deadpan
-- [Portable Energy Umbilical](examples/tangled-charging-cable.svg) · English · deadpan
-- [Rain Negotiation Device](examples/forgotten-folding-umbrella.svg) · English · absurd
-- [私人声音脐带](examples/worn-wired-earbuds.svg) · 中文 · tender
-- [Permission to Return](examples/faded-brass-key.svg) · English · tender
-- [可消耗思想探针](examples/used-pencil-stub.svg) · 中文 · absurd
+项目页面与 [examples/SOURCES.md](examples/SOURCES.md) 会客观说明 AI 辅助流程和图像来源；成品卡画面不嵌入 AI 生成标识。所有解释仍属于创意虚构，不声称真实来源、鉴定、估值或历史真实性。项目不托管推理服务，不要求共享 API Key、账号、统计或上传接口。
 
 ## 直接渲染与校验
 
