@@ -5,7 +5,7 @@ license: MIT
 metadata:
   author: WANG ZHEN
   version: "0.2.0"
-  repository: https://github.com/xxwzkdwz/future-museum-curator
+  repository: https://github.com/xxwzkdwz/artifact-3026
 ---
 
 # Artifact 3026

@@ -6,8 +6,6 @@
 
 Artifact 3026 是一个面向**支持开放 Agent Skills 标准的 AI 助手**的开源 Skill。它把日常物品的照片或描述变成一件来自未来的虚构博物馆藏品：宿主 Agent 负责策展文案和可选的图像创作，零依赖本地脚本负责稳定生成 1080×1440 分享卡。
 
-仓库 URL 继续保持为 <https://github.com/xxwzkdwz/future-museum-curator>；展示品牌与 Skill 标识分别升级为 **Artifact 3026 / 3026号藏品** 与 `artifact-3026`。命名调研与反证见 [docs/NAMING.md](docs/NAMING.md)。
-
 <p align="center">
   <img src="examples/cards/meeting-room-paper-cup.png" width="400" alt="示例：3026 年如何误读一只会议室纸杯">
 </p>
@@ -55,8 +53,8 @@ Artifact 3026 是一个面向**支持开放 Agent Skills 标准的 AI 助手**�
 克隆仓库后，支持项目级 `.agents/skills/` 的宿主可直接读取权威目录：
 
 ```bash
-git clone https://github.com/xxwzkdwz/future-museum-curator.git
-cd future-museum-curator
+git clone https://github.com/xxwzkdwz/artifact-3026.git
+cd artifact-3026
 ```
 
 复制到支持开放 `.agents` 约定的用户目录（Codex、Cursor、GitHub Copilot）：

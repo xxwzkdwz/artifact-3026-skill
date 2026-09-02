@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL_DIR = ROOT / ".agents" / "skills" / "artifact-3026"
 SKILL_PATH = SKILL_DIR / "SKILL.md"
 RENDERER_PATH = SKILL_DIR / "scripts" / "render_exhibit_card.py"
-REPOSITORY = "https://github.com/xxwzkdwz/future-museum-curator"
+REPOSITORY = "https://github.com/xxwzkdwz/artifact-3026"
 AI_BADGE_PATTERNS = (
     re.compile(r"\bAI[- ]?(?:ASSISTED|GENERATED)\b", re.IGNORECASE),
     re.compile(r"\b(?:CREATED|GENERATED) WITH AI\b", re.IGNORECASE),
@@ -95,7 +95,7 @@ def check_single_vendor_neutral_canonical_skill() -> None:
         for path in SKILL_DIR.rglob("*")
         if path.is_file() and path.suffix.lower() in {".md", ".py", ".json", ".yaml", ".yml"}
     )
-    banned = ("Codex", "OpenAI", "Claude", "Cursor", "Copilot", "$future-museum-curator")
+    banned = ("Codex", "OpenAI", "Claude", "Cursor", "Copilot")
     present = [term for term in banned if term in canonical_text]
     if present:
         fail("canonical skill contains vendor-specific terms: " + ", ".join(present))

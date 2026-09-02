@@ -5,7 +5,7 @@ Use this checklist before creating a public release of Artifact 3026.
 ## Identity and ownership
 
 - [ ] Author name is `WANG ZHEN` in `LICENSE` and the canonical Skill metadata.
-- [ ] The canonical repository remains `https://github.com/xxwzkdwz/future-museum-curator`.
+- [ ] The canonical repository is `https://github.com/xxwzkdwz/artifact-3026`.
 - [ ] Display brand is `Artifact 3026 / 3026号藏品`; Skill name and parent directory are both `artifact-3026`.
 - [ ] The repository contains exactly one `SKILL.md`, under `.agents/skills/artifact-3026/`.
 - [ ] Examples contain no confidential, proprietary, client, or personal information.
@@ -37,5 +37,5 @@ skills-ref validate .agents/skills/artifact-3026
 ## Publication
 
 - [ ] Review the staged diff and commit identity before pushing.
-- [ ] Preserve the existing public repository URL unless a separate migration plan is approved.
+- [ ] Keep the public repository name aligned with the Artifact 3026 brand and installation instructions.
 - [ ] Do not add analytics, hosted inference, payments, or user uploads without a separate design and privacy review.

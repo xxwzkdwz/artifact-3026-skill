@@ -6,8 +6,6 @@
 
 Artifact 3026 is an open-source skill **for AI assistants that support the open Agent Skills standard**. It turns a photo or description of an everyday object into a clearly fictional museum artifact from the future. The host agent handles curation and optional image creation; a dependency-free local script renders the final 1080×1440 share card.
 
-The repository URL remains <https://github.com/xxwzkdwz/future-museum-curator>. The display brand is **Artifact 3026** and the skill identifier is `artifact-3026`. See [docs/NAMING.md](docs/NAMING.md) for the naming research and collision checks.
-
 <p align="center">
   <img src="examples/cards/meeting-room-paper-cup.png" width="400" alt="A meeting-room paper cup misread as an artifact from 3026">
 </p>
@@ -55,8 +53,8 @@ These are documented compatibility paths, not a claim that every AI product supp
 Clone the repository. Hosts that support project-level `.agents/skills/` can read the canonical directory in place:
 
 ```bash
-git clone https://github.com/xxwzkdwz/future-museum-curator.git
-cd future-museum-curator
+git clone https://github.com/xxwzkdwz/artifact-3026.git
+cd artifact-3026
 ```
 
 Copy it to the common user path used by Codex, Cursor, and GitHub Copilot:
