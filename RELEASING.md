@@ -13,7 +13,9 @@ Use this checklist before creating a public release of Artifact 3026.
 
 ## Product truth
 
+- [ ] English is the root README, Chinese remains available at `README.zh-CN.md`, and both provide a working language switcher.
 - [ ] README says “for AI assistants that support the open Agent Skills standard” and does not claim universal one-click installation.
+- [ ] Both READMEs expose the `npx skills add` command near the top and link to community Discussions.
 - [ ] Platform-specific behavior is sourced in `COMPATIBILITY.md` and separated from local runtime testing.
 - [ ] Canonical Skill instructions use host-neutral terms and contain no platform-specific wrapper.
 - [ ] Public JPG scenes, finished SVG cards, and PNG share cards contain no AI-generation, AI-assistance, virtual-generation, or equivalent badge/watermark.
@@ -32,6 +34,7 @@ skills-ref validate .agents/skills/artifact-3026
 - [ ] Repository validation passes copy, symlink, portable ZIP, metadata, structure, terminology, gallery, and hygiene checks.
 - [ ] `skills-ref` passes when the reference validator is available; otherwise record it as unavailable rather than substituting an invented command.
 - [ ] All six public examples include portable JSON, recorded scene provenance, editable SVG, and a 1080×1440 PNG.
+- [ ] `.github/assets/social-preview.jpg` is 1280×640, below 1 MB, and uploaded as the repository social preview.
 - [ ] Installer dry runs point OpenAI/Codex, Cursor, GitHub Copilot, and project-level Kimi Code CLI to `.agents/skills`; Claude to `.claude/skills`; Qwen Code to `.qwen/skills`; and user-level Kimi Code CLI to `.config/agents/skills`.
 
 ## Publication

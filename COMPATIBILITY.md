@@ -23,6 +23,14 @@
 
 ## 安装器与普通聊天产品
 
+面向公开分发，README 首选开放生态安装命令：
+
+```bash
+npx skills add https://github.com/xxwzkdwz/artifact-3026 --skill artifact-3026
+```
+
+`skills` CLI 会从 GitHub 发现唯一权威 Skill，并让用户选择支持的 Agent。仓库自带的 `scripts/install_skill.py` 仍用于明确指定平台路径、离线审阅或开发态软链接：
+
 `scripts/install_skill.py` 只实现两种公开、可审计的文件操作：
 
 - `agents`、`codex`、`cursor`、`copilot` 目标映射到 `.agents/skills/artifact-3026`；
@@ -40,6 +48,7 @@
 - 通用结构校验：本机 Skill Creator 的 `quick_validate.py` 返回 `Skill is valid!`。
 - 行为验证：原有 12 项单元测试全部通过；仓库校验器还在临时目录完成 `.agents` 复制、Claude `.claude` 软链接、Qwen 与 Kimi 路径以及 ZIP 内容验证。
 - GitHub CLI：`gh 2.98.0` 提供预览版 `gh skill`；使用 `--from-local --allow-hidden-dirs --dir <临时目录>` 已成功发现并复制 `artifact-3026` 及全部资源。
+- skills.sh：`skills 1.5.23` 已通过公开 GitHub URL 发现唯一 Skill，并在隔离的临时 Codex 项目中完成复制安装；[公开条目](https://skills.sh/xxwzkdwz/artifact-3026/artifact-3026)已经可访问。
 - OpenAI/Codex：本机存在 `codex-cli 0.151.0-alpha.7.2`，且当前任务运行在 Codex 桌面环境；未为了截图另开任务或产生额外运行。
 - Claude Code、Cursor、GitHub Copilot、Qwen Code 与 Kimi Code CLI 独立客户端未做端到端运行，所以只按实际证据标记，不冒充完整客户端验证。
 

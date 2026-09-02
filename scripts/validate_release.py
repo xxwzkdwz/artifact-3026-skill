@@ -109,15 +109,19 @@ def check_license_readmes_and_compatibility() -> None:
     license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
     if "MIT License" not in license_text or "Copyright (c) 2026 WANG ZHEN" not in license_text:
         fail("LICENSE does not match the declared MIT author metadata")
-    chinese = (ROOT / "README.md").read_text(encoding="utf-8")
-    english = (ROOT / "README.en.md").read_text(encoding="utf-8")
-    if not re.search(r"[\u3400-\u9fff]", chinese) or "[English](README.en.md)" not in chinese:
-        fail("root README must default to Chinese with a clear English entry")
+    english = (ROOT / "README.md").read_text(encoding="utf-8")
+    chinese = (ROOT / "README.zh-CN.md").read_text(encoding="utf-8")
+    if "English · [简体中文](README.zh-CN.md)" not in english:
+        fail("root README must default to English with a clear Chinese entry")
+    if not re.search(r"[\u3400-\u9fff]", chinese) or "[English](README.md)" not in chinese:
+        fail("Chinese README is missing its language switcher")
     if "for AI assistants that support the open Agent Skills standard" not in english:
         fail("English README is missing the precise open-standard compatibility statement")
-    for name, text in (("README.md", chinese), ("README.en.md", english)):
+    for name, text in (("README.md", english), ("README.zh-CN.md", chinese)):
         if REPOSITORY not in text or "examples/meeting-room-paper-cup.svg" not in text:
             fail(f"{name} is missing the canonical URL or gallery evidence")
+        if "npx skills add https://github.com/xxwzkdwz/artifact-3026 --skill artifact-3026" not in text:
+            fail(f"{name} is missing the one-command public install path")
         if text.count('<img src="examples/cards/') != 7:
             fail(f"{name} must render one restrained hero and six visible gallery cards")
         if '<img src="examples/cards/meeting-room-paper-cup.png" width="400"' not in text:
@@ -229,8 +233,10 @@ def check_repository_hygiene() -> None:
     required = [
         ROOT / "LICENSE",
         ROOT / "README.md",
-        ROOT / "README.en.md",
+        ROOT / "README.zh-CN.md",
+        ROOT / "CONTRIBUTING.md",
         ROOT / "COMPATIBILITY.md",
+        ROOT / ".github" / "assets" / "social-preview.jpg",
         ROOT / "docs" / "NAMING.md",
         SKILL_PATH,
         RENDERER_PATH,
@@ -240,6 +246,9 @@ def check_repository_hygiene() -> None:
     missing = [str(path.relative_to(ROOT)) for path in required if not path.is_file()]
     if missing:
         fail("missing required files: " + ", ".join(missing))
+    social_preview = ROOT / ".github" / "assets" / "social-preview.jpg"
+    if social_preview.stat().st_size > 1_000_000:
+        fail("social preview must stay below 1 MB for reliable GitHub upload")
     if "output/" not in (ROOT / ".gitignore").read_text(encoding="utf-8").splitlines():
         fail("local trial output must remain excluded from the public repository")
     placeholder_marker = "[TO" + "DO:"
