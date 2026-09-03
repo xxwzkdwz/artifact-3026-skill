@@ -14,3 +14,5 @@ The local Owner trials under `output/` are excluded by `.gitignore` and are not 
 | Used pencil stub | `scenes/used-pencil-stub.jpg` | A short generic pencil with tooth marks, worn paint and a conservation cradle in an aged specimen drawer. |
 
 Every prompt requested a photorealistic archaeological survivor, three-quarter or oblique framing, off-center placement, believable material aging, thick glass and restrained archive light. Every prompt excluded people, brands, logos, readable text, watermarks, bright sterile galleries, centered symmetry, product-photography polish, neon cyberpunk and identity-changing redesign.
+
+The localized cards in `examples/english/` reuse their corresponding scene images above; localization changes only the exhibit-label copy.

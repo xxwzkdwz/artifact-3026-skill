@@ -118,14 +118,19 @@ def check_license_readmes_and_compatibility() -> None:
     if "for AI assistants that support the open Agent Skills standard" not in english:
         fail("English README is missing the precise open-standard compatibility statement")
     for name, text in (("README.md", english), ("README.zh-CN.md", chinese)):
-        if REPOSITORY not in text or "examples/meeting-room-paper-cup.svg" not in text:
+        if REPOSITORY not in text or "meeting-room-paper-cup.svg" not in text:
             fail(f"{name} is missing the canonical URL or gallery evidence")
         if "npx skills add https://github.com/xxwzkdwz/artifact-3026 --skill artifact-3026" not in text:
             fail(f"{name} is missing the one-command public install path")
         if text.count('<img src="examples/cards/') != 7:
             fail(f"{name} must render one restrained hero and six visible gallery cards")
-        if '<img src="examples/cards/meeting-room-paper-cup.png" width="400"' not in text:
-            fail(f"{name} hero must be constrained to 400px")
+        expected_hero = (
+            "examples/cards/english/meeting-room-paper-cup.png"
+            if name == "README.md"
+            else "examples/cards/meeting-room-paper-cup.png"
+        )
+        if f'<img src="{expected_hero}" width="400"' not in text:
+            fail(f"{name} hero must use the correct locale and be constrained to 400px")
         if text.count('width="180"') != 6:
             fail(f"{name} gallery must use six uniform 180px thumbnails")
     compatibility = (ROOT / "COMPATIBILITY.md").read_text(encoding="utf-8")
@@ -227,6 +232,27 @@ def check_examples() -> None:
         fail("gallery must cover three tones and contain three Chinese examples")
     if not (ROOT / "examples" / "SOURCES.md").is_file():
         fail("example image provenance record is missing")
+
+    localized_inputs = sorted((ROOT / "examples" / "english").glob("*.json"))
+    if len(localized_inputs) != 3:
+        fail(f"expected 3 English-localized examples, found {len(localized_inputs)}")
+    for input_path in localized_inputs:
+        data = json.loads(input_path.read_text(encoding="utf-8"))
+        visible_copy = "\n".join(str(data.get(field, "")) for field in VISIBLE_CARD_FIELDS)
+        if re.search(r"[\u3400-\u9fff]", visible_copy):
+            fail(f"English-localized card contains Chinese copy: {input_path.name}")
+        rendered = renderer.render(data, base_dir=input_path.parent)
+        output_path = input_path.with_suffix(".svg")
+        if not output_path.is_file() or output_path.read_text(encoding="utf-8") != rendered:
+            fail(f"missing or stale localized example: {output_path.relative_to(ROOT)}")
+        card_path = ROOT / "examples" / "cards" / "english" / f"{input_path.stem}.png"
+        if not card_path.is_file():
+            fail(f"missing localized PNG card: {card_path.relative_to(ROOT)}")
+        payload = card_path.read_bytes()
+        if payload[:8] != b"\x89PNG\r\n\x1a\n" or len(payload) < 24:
+            fail(f"invalid localized PNG card: {card_path.relative_to(ROOT)}")
+        if struct.unpack(">II", payload[16:24]) != (1080, 1440):
+            fail(f"wrong localized PNG card dimensions: {card_path.relative_to(ROOT)}")
 
 
 def check_repository_hygiene() -> None:

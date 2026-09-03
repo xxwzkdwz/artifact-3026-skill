@@ -12,7 +12,7 @@ Turn a photo of an everyday object into a fictional museum exhibit from the year
 Artifact 3026 is an open-source skill **for AI assistants that support the open Agent Skills standard**. Your assistant does the creative work with its available tools; the repository provides the curatorial workflow and a dependency-free card renderer. No hosted service, shared API key, account, analytics, or upload endpoint is required.
 
 <p align="center">
-  <img src="examples/cards/meeting-room-paper-cup.png" width="400" alt="A meeting-room paper cup misread as an artifact from 3026">
+  <img src="examples/cards/english/meeting-room-paper-cup.png" width="400" alt="A meeting-room paper cup misread as an artifact from 3026">
 </p>
 
 ## Install
@@ -79,16 +79,16 @@ Six ordinary objects, reimagined as artifacts from the future. Click a card for 
 
 <table>
   <tr>
-    <td width="50%" align="center"><a href="examples/meeting-room-paper-cup.svg"><img src="examples/cards/meeting-room-paper-cup.png" width="180" alt="一次性共识容器"></a><br><strong>一次性共识容器</strong><br><sub>Chinese · deadpan</sub></td>
+    <td width="50%" align="center"><a href="examples/english/meeting-room-paper-cup.svg"><img src="examples/cards/english/meeting-room-paper-cup.png" width="180" alt="Disposable Consensus Vessel"></a><br><strong>Disposable Consensus Vessel</strong><br><sub>English · deadpan</sub></td>
     <td width="50%" align="center"><a href="examples/tangled-charging-cable.svg"><img src="examples/cards/tangled-charging-cable.png" width="180" alt="Portable Energy Umbilical"></a><br><strong>Portable Energy Umbilical</strong><br><sub>English · deadpan</sub></td>
   </tr>
   <tr>
     <td align="center"><a href="examples/forgotten-folding-umbrella.svg"><img src="examples/cards/forgotten-folding-umbrella.png" width="180" alt="Rain Negotiation Device"></a><br><strong>Rain Negotiation Device</strong><br><sub>English · absurd</sub></td>
-    <td align="center"><a href="examples/worn-wired-earbuds.svg"><img src="examples/cards/worn-wired-earbuds.png" width="180" alt="私人声音脐带"></a><br><strong>私人声音脐带</strong><br><sub>Chinese · tender</sub></td>
+    <td align="center"><a href="examples/english/worn-wired-earbuds.svg"><img src="examples/cards/english/worn-wired-earbuds.png" width="180" alt="Private Sound Umbilical"></a><br><strong>Private Sound Umbilical</strong><br><sub>English · tender</sub></td>
   </tr>
   <tr>
     <td align="center"><a href="examples/faded-brass-key.svg"><img src="examples/cards/faded-brass-key.png" width="180" alt="Permission to Return"></a><br><strong>Permission to Return</strong><br><sub>English · tender</sub></td>
-    <td align="center"><a href="examples/used-pencil-stub.svg"><img src="examples/cards/used-pencil-stub.png" width="180" alt="可消耗思想探针"></a><br><strong>可消耗思想探针</strong><br><sub>Chinese · absurd</sub></td>
+    <td align="center"><a href="examples/english/used-pencil-stub.svg"><img src="examples/cards/english/used-pencil-stub.png" width="180" alt="Consumable Thought Probe"></a><br><strong>Consumable Thought Probe</strong><br><sub>English · absurd</sub></td>
   </tr>
 </table>
 
