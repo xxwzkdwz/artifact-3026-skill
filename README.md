@@ -7,23 +7,75 @@ English · [简体中文](README.zh-CN.md)
 [![skills.sh installs](https://skills.sh/b/xxwzkdwz/artifact-3026)](https://skills.sh/xxwzkdwz/artifact-3026)
 [![License: MIT](https://img.shields.io/badge/License-MIT-b28a50.svg)](LICENSE)
 
-Artifact 3026 is an open-source skill **for AI assistants that support the open Agent Skills standard**. It turns a photo or description of an everyday object into a clearly fictional museum artifact from the future. The host agent handles curation and optional image creation; a dependency-free local script renders the final 1080×1440 share card.
+Turn a photo of an everyday object into a fictional museum exhibit from the year 3026—complete with a future-archaeology scene, a deadpan label, an accession number, and a shareable 1080×1440 card.
+
+Artifact 3026 is an open-source skill **for AI assistants that support the open Agent Skills standard**. Your assistant does the creative work with its available tools; the repository provides the curatorial workflow and a dependency-free card renderer. No hosted service, shared API key, account, analytics, or upload endpoint is required.
 
 <p align="center">
   <img src="examples/cards/meeting-room-paper-cup.png" width="400" alt="A meeting-room paper cup misread as an artifact from 3026">
 </p>
 
-## Install in one command
+## Install
 
 ```bash
 npx skills add https://github.com/xxwzkdwz/artifact-3026 --skill artifact-3026
 ```
 
-Then attach a photo and ask: `What will 3026 think this was?` The installer detects supported agents and lets you choose where to add the skill. Platform-specific and manual options remain under [Install](#install).
+The installer finds supported agents and lets you choose where to add the skill. Then attach a photo and ask:
+
+```text
+Use artifact-3026: What will 3026 think this was? Render a vertical share card.
+```
+
+<details>
+<summary><strong>Manual installation and local development</strong></summary>
+
+Clone the repository first:
+
+```bash
+git clone https://github.com/xxwzkdwz/artifact-3026.git
+cd artifact-3026
+```
+
+Install the canonical skill in a platform-specific user directory:
+
+```bash
+# Codex, Cursor, and GitHub Copilot
+python3 scripts/install_skill.py --platform agents --scope user --mode copy
+
+# Claude / Claude Code
+python3 scripts/install_skill.py --platform claude --scope user --mode copy
+
+# Qwen Code
+python3 scripts/install_skill.py --platform qwen --scope user --mode copy
+
+# Kimi Code CLI
+python3 scripts/install_skill.py --platform kimi --scope user --mode copy
+```
+
+Use `--mode symlink` while developing, or add `--dry-run` to inspect the destination. The installer stops when a different target already exists and never silently overwrites it.
+
+To make a portable ZIP for Volcengine AgentKit or manual attachment in a chat product:
+
+```bash
+python3 scripts/package_skill.py
+```
+
+</details>
+
+## What it creates
+
+Each run can produce:
+
+- a recognizable museum display image that preserves the original object;
+- a title, original purpose, future misinterpretation, curator note, and accession number;
+- an editable SVG and a vertical PNG card ready for sharing.
+
+You can steer the tone—deadpan, tender, absurd, or restrained—and ask the assistant to preserve scratches, wear, or the object's original condition.
 
 ## See the present through the eyes of 3026
 
-Here are six ordinary objects, reimagined as artifacts from the future. The collection moves between Chinese and English, and from deadpan to tender and absurd. Click an image for the editable SVG; each artifact also includes its [JSON data](examples/), generated [museum scene](examples/scenes/), and [1080×1440 PNG](examples/cards/). Image provenance remains in [examples/SOURCES.md](examples/SOURCES.md).
+Six ordinary objects, reimagined as artifacts from the future. Click a card for its editable SVG. Each example also includes [JSON data](examples/), a generated [museum scene](examples/scenes/), and a [1080×1440 PNG](examples/cards/). Image provenance is recorded in [examples/SOURCES.md](examples/SOURCES.md).
 
 <table>
   <tr>
@@ -42,81 +94,50 @@ Here are six ordinary objects, reimagined as artifacts from the future. The coll
 
 ## Make it a shared ritual
 
-- **Post a daily artifact:** Photograph one small object each day and share what people in 3026 might think it was. Over time, it becomes your own future museum.
-- **Make a reveal video:** Open with the real object, then cut to its future exhibit card and read the deadpan museum label aloud. Let the comments choose the next artifact.
-- **Play with friends:** Swap object photos, guess how the future will misunderstand them, and reveal the generated cards. Try a couples, roommates, coworkers, or family collection.
-- **Build a personal exhibition:** Turn someone's keys, earbuds, tickets, and desk objects into a birthday keepsake, travel archive, or year-in-review collection.
+- **Post a daily artifact:** Photograph one small object each day and build your own future museum over time.
+- **Make a reveal video:** Show the real object first, cut to the exhibit card, and read the museum label aloud. Let the comments choose what enters the museum next.
+- **Play with friends:** Swap object photos, guess how the future will misunderstand them, and reveal the generated cards.
+- **Build a personal exhibition:** Turn keys, earbuds, tickets, and desk objects into a birthday keepsake, travel archive, or year-in-review collection.
 
-Share your result with **#Artifact3026**, link back to this repository, or post it in [GitHub Discussions](https://github.com/xxwzkdwz/artifact-3026/discussions). Selected community artifacts may join a future showcase with the creator's permission.
+Share with **#Artifact3026**, link back to this repository, or post in [GitHub Discussions](https://github.com/xxwzkdwz/artifact-3026/discussions). Community artifacts may join a future showcase with the creator's permission.
 
-## Compatibility
+## Works with your AI
 
-Artifact 3026 is not tied to one model vendor. Some agents load the skill directly; ordinary chat products can use the same creative workflow by reading the uploaded files or a copied prompt.
+Artifact 3026 is vendor-neutral. Installation depends on the host, not just the model:
 
-| Platform | How to use it |
-|---|---|
-| OpenAI / Codex, Cursor, GitHub Copilot | Read `.agents/skills/artifact-3026/` in place or install it at user scope |
-| Claude / Claude Code | Use the installer to place the canonical skill under `.claude/skills/` |
-| Qwen Code | Use `--platform qwen` to install under `.qwen/skills/` |
-| Kimi Code CLI | Reads the project `.agents/skills/` path; `--platform kimi` installs at user scope |
-| Doubao models / Volcengine AgentKit | Build the portable ZIP and upload it as an AgentKit custom skill |
-| Zhipu GLM / GLM Coding Plan | Load it through a coding-agent host that supports Agent Skills; the host, not the model, owns installation |
+| Experience | Examples | Use |
+|---|---|---|
+| Open Agent Skills hosts | Codex, Cursor, GitHub Copilot | Install with the command above or read `.agents/skills/artifact-3026/` in place |
+| Compatible skill hosts | Claude / Claude Code, Qwen Code, Kimi Code CLI | Use the command above when detected, or open the manual setup section |
+| Custom-skill platforms | Volcengine AgentKit | Build the portable ZIP and upload it as a custom skill |
+| Ordinary chat products | Doubao, Zhipu Qingyan, Qwen chat, Kimi, DeepSeek | Attach `SKILL.md` or the portable ZIP and use the prompt below |
 
-Ordinary chat products—including the Doubao app, Zhipu Qingyan, Qwen chat, Kimi, and DeepSeek—can still create an artifact from a photo, but they should not all be described as native one-click skill hosts. Attach `SKILL.md` or the portable ZIP and use this prompt; image generation and the local renderer depend on the product:
-
-> Read the attached Artifact 3026 skill. Reimagine this object as an exhibit in a museum in the year 3026 while keeping the object recognizable. Create a future-archaeology display image and provide an artifact name, original purpose, future misinterpretation, curator note, and accession number. If you cannot run the repository renderer, return the copy and image directly.
-
-The repository keeps one canonical `SKILL.md`. See [COMPATIBILITY.md](COMPATIBILITY.md) for official sources, support boundaries, and local test status.
-
-## Install
-
-The one-command installer above is the easiest option. To inspect or develop the skill locally, clone the repository; hosts that support project-level `.agents/skills/` can read the canonical directory in place:
-
-```bash
-git clone https://github.com/xxwzkdwz/artifact-3026.git
-cd artifact-3026
-```
-
-Copy it to the common user path used by Codex, Cursor, and GitHub Copilot:
-
-```bash
-python3 scripts/install_skill.py --platform agents --scope user --mode copy
-```
-
-Adapt it to Claude or Claude Code:
-
-```bash
-python3 scripts/install_skill.py --platform claude --scope user --mode copy
-```
-
-Adapt it to Qwen Code or Kimi Code CLI:
-
-```bash
-python3 scripts/install_skill.py --platform qwen --scope user --mode copy
-python3 scripts/install_skill.py --platform kimi --scope user --mode copy
-```
-
-Use `--mode symlink` for development or `--dry-run` to inspect the target. The installer stops if a different target already exists and never silently overwrites it.
-
-For Volcengine AgentKit and ordinary chat products without an automatic loader, build a portable ZIP. Upload it as a custom skill in AgentKit, or attach it manually in a chat product:
-
-```bash
-python3 scripts/package_skill.py
-```
-
-AgentKit uses its documented custom-skill upload flow. Ordinary chat products are **manually compatible**: attachment reading and local script execution depend on the product and are not presented as one-click installation.
-
-## Try it
-
-Attach a photo or describe an object, then ask the host agent to use `artifact-3026`:
+<details>
+<summary><strong>Prompt for a chat product without a skill installer</strong></summary>
 
 ```text
-Use artifact-3026: What will 3026 think this tangled charging cable was? Render a vertical share card.
+Read the attached Artifact 3026 skill. Reimagine this object as an exhibit in a museum in the year 3026 while keeping the object recognizable. Create a future-archaeology display image and provide an artifact name, original purpose, future misinterpretation, curator note, and accession number. If you cannot run the repository renderer, return the copy and image directly.
 ```
 
-The project page and [examples/SOURCES.md](examples/SOURCES.md) transparently describe the AI-assisted workflow and image provenance; the finished card artwork does not embed an AI-generation label. Every interpretation remains creative fiction and never claims real provenance, appraisal, valuation, authentication, or museum affiliation. The project operates without a repository-hosted inference service, shared API key, account, analytics, or upload endpoint.
+</details>
 
-## Render and validate
+The repository maintains one canonical `SKILL.md`. See [COMPATIBILITY.md](COMPATIBILITY.md) for official sources, support boundaries, and local test status.
+
+## How it works
+
+1. The host agent studies the object's visible details and separates observation from invention.
+2. It writes a fictional future interpretation in the requested tone.
+3. If image generation is available, it creates a museum scene while keeping the object recognizable.
+4. The local renderer turns the structured exhibit data into a consistent SVG or PNG share card.
+
+The finished card does not embed an AI-generation badge. The project page and [examples/SOURCES.md](examples/SOURCES.md) still disclose the AI-assisted workflow and image provenance.
+
+## Contribute
+
+New artifacts, translations, renderer improvements, and compatibility reports are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+<details>
+<summary><strong>Run the renderer and release checks</strong></summary>
 
 ```bash
 python3 .agents/skills/artifact-3026/scripts/render_exhibit_card.py \
@@ -128,24 +149,16 @@ python3 scripts/validate_release.py
 skills-ref validate .agents/skills/artifact-3026
 ```
 
-The final command requires the reference validator to be installed. The first two checks still verify the directory structure, metadata, single `SKILL.md`, vendor-neutral canonical content, gallery consistency, and renderer behavior.
+The last command requires the Agent Skills reference validator. The repository tests cover its canonical directory, metadata, renderer behavior, gallery consistency, compatibility adapters, and portable ZIP.
 
-## Repository map
+</details>
 
-- `.agents/skills/artifact-3026/`: the only canonical skill, references, and renderer
-- `examples/`: bilingual inputs, scenes, SVGs, and PNG cards
-- `scripts/install_skill.py`: copy/symlink platform adapter
-- `scripts/package_skill.py`: manual ZIP delivery for ordinary chat products
-- `scripts/validate_release.py` and `tests/`: structural, compatibility, and behavior checks
-- [CONTRIBUTING.md](CONTRIBUTING.md): community showcase and contribution guide
+## Creative boundaries
 
-## Privacy and boundaries
+- Treat every date, institution, accession number, and interpretation as fiction—not authentication, provenance, appraisal, or museum affiliation.
+- Check source photos for faces, addresses, badges, account details, or other identifiers before using them.
+- Do not add unsupported logos or include confidential, proprietary, client, or employer material.
 
-- Inspect source images for faces, addresses, badges, account details, or other identifiers.
-- Do not add unsupported logos or imply that a real museum authenticated the object.
-- Treat every date, accession number, institution, and interpretation as fiction.
-- Keep confidential, proprietary, client, and personal material out of examples.
-
-## License and author
+## License
 
 MIT © 2026 [WANG ZHEN](https://github.com/xxwzkdwz)
