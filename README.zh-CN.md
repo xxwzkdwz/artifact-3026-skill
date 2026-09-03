@@ -4,7 +4,7 @@
 
 [English](README.md) · 简体中文
 
-[![skills.sh 安装量](https://skills.sh/b/xxwzkdwz/artifact-3026)](https://skills.sh/xxwzkdwz/artifact-3026)
+[![skills.sh 安装量](https://skills.sh/b/xxwzkdwz/artifact-3026-skill)](https://skills.sh/xxwzkdwz/artifact-3026-skill)
 [![License: MIT](https://img.shields.io/badge/License-MIT-b28a50.svg)](LICENSE)
 
 把一件日常物品的照片变成 3026 年博物馆里的虚构藏品：未来考古展陈图、一本正经的展签、馆藏编号，以及可直接分享的 1080×1440 竖版卡片。
@@ -18,7 +18,7 @@ Artifact 3026 是一个面向**支持开放 Agent Skills 标准的 AI 助手**�
 ## 安装
 
 ```bash
-npx skills add https://github.com/xxwzkdwz/artifact-3026 --skill artifact-3026
+npx skills add https://github.com/xxwzkdwz/artifact-3026-skill --skill artifact-3026
 ```
 
 安装器会识别支持的 Agent，并让你选择安装位置。完成后附上一张照片，直接问：
@@ -33,8 +33,8 @@ npx skills add https://github.com/xxwzkdwz/artifact-3026 --skill artifact-3026
 先克隆仓库：
 
 ```bash
-git clone https://github.com/xxwzkdwz/artifact-3026.git
-cd artifact-3026
+git clone https://github.com/xxwzkdwz/artifact-3026-skill.git
+cd artifact-3026-skill
 ```
 
 把唯一权威 Skill 安装到不同平台的用户目录：
@@ -99,7 +99,7 @@ python3 scripts/package_skill.py
 - **和朋友一起玩**：互相发物品照片，先猜未来人会怎么误解，再揭晓生成结果。
 - **做一场私人展览**：把钥匙、耳机、旧票根和书桌物件收成一组，做成生日纪念、旅行回忆或年度生活档案。
 
-发布时可以带上 **#3026号藏品** 或 **#Artifact3026**，附上仓库链接，也欢迎发到 [GitHub Discussions](https://github.com/xxwzkdwz/artifact-3026/discussions)。取得作者同意后，优秀作品可能进入后续社区展厅。
+发布时可以带上 **#3026号藏品** 或 **#Artifact3026**，附上仓库链接，也欢迎发到 [GitHub Discussions](https://github.com/xxwzkdwz/artifact-3026-skill/discussions)。取得作者同意后，优秀作品可能进入后续社区展厅。
 
 ## 在你的 AI 里使用
 

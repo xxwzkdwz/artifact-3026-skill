@@ -5,7 +5,7 @@ Use this checklist before creating a public release of Artifact 3026.
 ## Identity and ownership
 
 - [ ] Author name is `WANG ZHEN` in `LICENSE` and the canonical Skill metadata.
-- [ ] The canonical repository is `https://github.com/xxwzkdwz/artifact-3026`.
+- [ ] The canonical repository is `https://github.com/xxwzkdwz/artifact-3026-skill`.
 - [ ] Display brand is `Artifact 3026 / 3026号藏品`; Skill name and parent directory are both `artifact-3026`.
 - [ ] The repository contains exactly one `SKILL.md`, under `.agents/skills/artifact-3026/`.
 - [ ] Examples contain no confidential, proprietary, client, or personal information.

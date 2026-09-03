@@ -34,11 +34,11 @@
 
 - **展示品牌：Artifact 3026 / 3026号藏品**
 - **Skill 标识和目录：`artifact-3026`**
-- **仓库名与 URL：`artifact-3026` / `https://github.com/xxwzkdwz/artifact-3026`**
+- **仓库名与 URL：`artifact-3026-skill` / `https://github.com/xxwzkdwz/artifact-3026-skill`**
 
 理由：`Artifact 3026` 在不借用现有知名艺术系列名称的前提下，保留了“未来把当下错认成文物”的故事。它短、自然、可形成 `#Artifact3026`，又能让输出物（artifact）和时间钩子（3026）立即可见。`artifact-3026` 满足开放 Agent Skills 的小写连字符规则。
 
-仓库名与品牌统一为 `artifact-3026`，减少用户在浏览、记忆和安装时的认知负担。旧仓库地址由 GitHub 自动重定向，仅用于兼容已经分享出去的链接，不再作为首页内容强调。
+展示品牌继续保持简洁的 `Artifact 3026`，仓库名使用 `artifact-3026-skill`，让 GitHub 搜索结果和外部分享在脱离上下文时也能立即表明它是一个 Skill。内部 Skill 标识仍为 `artifact-3026`，避免安装后的调用名称变长。旧仓库地址由 GitHub 自动重定向，仅用于兼容已经分享出去的链接，不再作为首页内容强调。
 
 ## 风险边界
 

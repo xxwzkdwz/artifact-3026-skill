@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL_DIR = ROOT / ".agents" / "skills" / "artifact-3026"
 SKILL_PATH = SKILL_DIR / "SKILL.md"
 RENDERER_PATH = SKILL_DIR / "scripts" / "render_exhibit_card.py"
-REPOSITORY = "https://github.com/xxwzkdwz/artifact-3026"
+REPOSITORY = "https://github.com/xxwzkdwz/artifact-3026-skill"
 AI_BADGE_PATTERNS = (
     re.compile(r"\bAI[- ]?(?:ASSISTED|GENERATED)\b", re.IGNORECASE),
     re.compile(r"\b(?:CREATED|GENERATED) WITH AI\b", re.IGNORECASE),
@@ -120,7 +120,7 @@ def check_license_readmes_and_compatibility() -> None:
     for name, text in (("README.md", english), ("README.zh-CN.md", chinese)):
         if REPOSITORY not in text or "meeting-room-paper-cup.svg" not in text:
             fail(f"{name} is missing the canonical URL or gallery evidence")
-        if "npx skills add https://github.com/xxwzkdwz/artifact-3026 --skill artifact-3026" not in text:
+        if "npx skills add https://github.com/xxwzkdwz/artifact-3026-skill --skill artifact-3026" not in text:
             fail(f"{name} is missing the one-command public install path")
         if text.count('<img src="examples/cards/') != 7:
             fail(f"{name} must render one restrained hero and six visible gallery cards")

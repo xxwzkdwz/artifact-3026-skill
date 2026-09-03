@@ -4,7 +4,7 @@
 
 English · [简体中文](README.zh-CN.md)
 
-[![skills.sh installs](https://skills.sh/b/xxwzkdwz/artifact-3026)](https://skills.sh/xxwzkdwz/artifact-3026)
+[![skills.sh installs](https://skills.sh/b/xxwzkdwz/artifact-3026-skill)](https://skills.sh/xxwzkdwz/artifact-3026-skill)
 [![License: MIT](https://img.shields.io/badge/License-MIT-b28a50.svg)](LICENSE)
 
 Turn a photo of an everyday object into a fictional museum exhibit from the year 3026—complete with a future-archaeology scene, a deadpan label, an accession number, and a shareable 1080×1440 card.
@@ -18,7 +18,7 @@ Artifact 3026 is an open-source skill **for AI assistants that support the open 
 ## Install
 
 ```bash
-npx skills add https://github.com/xxwzkdwz/artifact-3026 --skill artifact-3026
+npx skills add https://github.com/xxwzkdwz/artifact-3026-skill --skill artifact-3026
 ```
 
 The installer finds supported agents and lets you choose where to add the skill. Then attach a photo and ask:
@@ -33,8 +33,8 @@ Use artifact-3026: What will 3026 think this was? Render a vertical share card.
 Clone the repository first:
 
 ```bash
-git clone https://github.com/xxwzkdwz/artifact-3026.git
-cd artifact-3026
+git clone https://github.com/xxwzkdwz/artifact-3026-skill.git
+cd artifact-3026-skill
 ```
 
 Install the canonical skill in a platform-specific user directory:
@@ -99,7 +99,7 @@ Six ordinary objects, reimagined as artifacts from the future. Click a card for 
 - **Play with friends:** Swap object photos, guess how the future will misunderstand them, and reveal the generated cards.
 - **Build a personal exhibition:** Turn keys, earbuds, tickets, and desk objects into a birthday keepsake, travel archive, or year-in-review collection.
 
-Share with **#Artifact3026**, link back to this repository, or post in [GitHub Discussions](https://github.com/xxwzkdwz/artifact-3026/discussions). Community artifacts may join a future showcase with the creator's permission.
+Share with **#Artifact3026**, link back to this repository, or post in [GitHub Discussions](https://github.com/xxwzkdwz/artifact-3026-skill/discussions). Community artifacts may join a future showcase with the creator's permission.
 
 ## Works with your AI
 

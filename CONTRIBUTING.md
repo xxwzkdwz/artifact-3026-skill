@@ -4,7 +4,7 @@ Artifact 3026 welcomes new artifacts, language improvements, compatibility repor
 
 ## Share a community artifact
 
-The lightest way to participate is to post your result in [GitHub Discussions](https://github.com/xxwzkdwz/artifact-3026/discussions). Please include:
+The lightest way to participate is to post your result in [GitHub Discussions](https://github.com/xxwzkdwz/artifact-3026-skill/discussions). Please include:
 
 - the finished exhibit card;
 - a short description of the original object;
